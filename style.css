@@ -1,0 +1,141 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  body, html, ul, h1, h2, h3, p, img, button {
+    margin: 0;
+    padding: 0;
+  }
+  
+  ul {
+    list-style: none;
+  }
+.body {
+  background: black;
+}
+.header {
+  margin-bottom: 10px;
+  padding: 20px 0;
+  display: flex;
+  justify-content: center;
+  background: rgb(52,194,16);
+  background: linear-gradient(38deg, rgba(52,194,16,0.9588877787443102) 0%, rgba(10,120,219,1) 100%);
+}
+.title {
+  font-size: 30px;
+  color: orange;
+}
+.main {
+  display: flex;
+  background: rgb(234,235,169);
+  background: linear-gradient(38deg, rgba(234,235,169,0.17457405325411413) 0%, rgba(174,231,170,0.1241538851868873) 27%, rgba(10,219,174,0.10734716249781162) 100%);
+}
+.navigation {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 50px;
+  padding-left: 30px;
+  width: 30%;
+}
+.navigation__list {
+  margin-bottom: 50px;
+}
+.navigation__item {
+}
+.navigation__item:not(:last-child) {
+  margin-bottom: 50px;
+}
+.active {
+}
+.done {
+}
+.navigation__button {
+  width: 100px;
+}
+.tasks {
+  width: 70%;
+  
+}
+.tasks__form {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.tasks__input {
+  margin-bottom: 10px;
+  padding-left: 10px;
+  width: 50%;
+  height: 30px;
+}
+.textarea {
+  padding: 10px;
+  width: 50%;
+  max-width: 60%;
+  min-height: 100px;
+  max-height: 150px;
+}
+
+.tasks__list {
+  
+}
+.task__item {
+}
+.task__article {
+  position: relative;
+}
+label {
+  display: block;
+  position: absolute;
+  top: 18px;
+  left: 15px;
+  width: 15px;
+  height: 15px;
+  background-color: greenyellow;
+  border-radius: 50px;
+}
+.checkbox {
+  display: none;
+}
+.task__rollup {
+  display: block;
+  position: absolute;
+  top: 15px;
+  right: 230px;
+  width: 20px;
+  height: 20px;
+  background: url('icons/arr.png') center/100% no-repeat;
+  border: none;
+  cursor: pointer;
+}
+.task__clear {
+  display: block;
+  position: absolute;
+  top: 15px;
+  right: 190px;
+  width: 20px;
+  height: 20px;
+  background: url('icons/close.png') 0% 10%/100% no-repeat;
+  border: none;
+  cursor: pointer;
+}
+.taks__title {
+  display: block;
+  margin-bottom: 10px;
+  padding: 10px 0;
+  width: 85%;
+  text-align: center;
+  color: green;
+  outline: 1px solid green;
+}
+.task__description {
+  display: block;
+  padding: 15px;
+  max-height: 140px;
+  width: 85%;
+  overflow-y: auto;
+  outline: 1px solid green;
+
+}
+.footer {
+}
