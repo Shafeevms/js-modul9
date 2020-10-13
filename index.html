@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="font.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -16,18 +17,21 @@
                 <li class="navigation__item active"> Tasks</li>
                 <li class="navigation__item done"> Performed</li>
             </ul>
-            <button class="navigation__button" id="clear_tasks" aria-label="Delete performed">Delete performed</button>
+            <button class="navigation__button button" id="clear_tasks" aria-label="Delete performed">Delete performed</button>
         </section>
         <section class="tasks">
             <form class="tasks__form" action="#">
-                <input id="input-titile" class="tasks__input" type="text" placeholder="Title">
-                <textarea name="textarea" id="textarea" class="textarea" placeholder="Description"></textarea>
+                <input id="input-title" class="tasks__input" type="text" placeholder="Title">
+                <div class="form_wrap">
+                    <textarea name="textarea" id="textarea" class="textarea" placeholder="Description"></textarea>
+                    <button class="button form__button" id="form-btn" >Create task</button>
+                </div>
             </form>
             <ul class="tasks__list">
                 <li class="task__item">
                     <article class="task__article">
                         <input type="checkbox" class="checkbox" id="checkbox">
-                        <label class="label" for="checkbox" aria-label="mark task"></label>
+                        <label class="label label-done" for="checkbox" aria-label="mark task"></label>
                         <button class="task__rollup" id="roll" aria-label="roll up the description"></button>
                         <button class="task__clear" id="delete" aria-label="delete the description"></button>
                         <h2 class="taks__title">Task</h2>
@@ -40,6 +44,6 @@
     <footer class="footer">
 
     </footer>
-    <script src="script.js"></script>
+    <script defer src="script.js"></script>
 </body>
 </html>

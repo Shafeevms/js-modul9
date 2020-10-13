@@ -10,25 +10,29 @@
   ul {
     list-style: none;
   }
-.body {
-  background: black;
+body {
+  font-family: Roboto, Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  background: rgb(234,235,169);
+  background: linear-gradient(38deg, rgba(234,235,169,0.17457405325411413) 0%, rgba(174,231,170,0.1241538851868873) 27%, rgba(10,219,174,0.10734716249781162) 100%);
 }
 .header {
-  margin-bottom: 10px;
   padding: 20px 0;
   display: flex;
   justify-content: center;
   background: rgb(52,194,16);
   background: linear-gradient(38deg, rgba(52,194,16,0.9588877787443102) 0%, rgba(10,120,219,1) 100%);
+  box-shadow: 1px 1px 5px navy;
 }
 .title {
   font-size: 30px;
   color: orange;
+  text-shadow: 1px 1px 5px black;
 }
 .main {
   display: flex;
-  background: rgb(234,235,169);
-  background: linear-gradient(38deg, rgba(234,235,169,0.17457405325411413) 0%, rgba(174,231,170,0.1241538851868873) 27%, rgba(10,219,174,0.10734716249781162) 100%);
+  
 }
 .navigation {
   display: flex;
@@ -42,18 +46,25 @@
   margin-bottom: 50px;
 }
 .navigation__item {
+  font-size: 20px;
+  font-weight: 700;
 }
 .navigation__item:not(:last-child) {
   margin-bottom: 50px;
 }
 .active {
+  color: orange;
+  text-shadow: 1px 1px 5px black;
 }
 .done {
+  color: green;
+  text-shadow: 1px 1px 3px navy;
 }
 .navigation__button {
   width: 100px;
 }
 .tasks {
+  padding-top: 30px;
   width: 70%;
   
 }
@@ -91,8 +102,13 @@ label {
   left: 15px;
   width: 15px;
   height: 15px;
-  background-color: greenyellow;
   border-radius: 50px;
+}
+.label-proccess {
+  background-color: greenyellow;
+}
+.label-done {
+  background-color: red;
 }
 .checkbox {
   display: none;
