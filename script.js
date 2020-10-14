@@ -1,7 +1,10 @@
 const input = document.getElementById('input-title');
 const textarea = document.getElementById('textarea');
 const addTaskButton = document.getElementById('form-btn');
+const  ul = document.querySelector('.tasks__list');
+let activeNum = document.querySelector('.active_num');
 const tasks = [];
+
 
 // так не работает... почему?
 
@@ -16,28 +19,38 @@ const tasks = [];
     
 // });
 
-// и так не работает
+addTaskButton.addEventListener('click', function(e) {
+    e.preventDefault();
+    if(input.value && textarea.value) {
+        input.classList.remove('alert');
+        textarea.classList.remove('alert');
+        tasks.push({
+            title: input.value,
+            description: textarea.value,
+        });   
+        let li = document.createElement('li');
+        li.className = 'task__item';
+        li.innerHTML = `<article class="task__article">
+                            <input type="checkbox" class="checkbox" id="checkbox">
+                            <label class="label label-done" for="checkbox" aria-label="mark task"></label>
+                            <button class="task__rollup" id="roll" aria-label="roll up the description"></button>
+                            <button class="task__clear" id="delete" aria-label="delete the description"></button>
+                            <h2 class="taks__title">${input.value}</h2>
+                            <p class="task__description">${textarea.value}
+                        </article>`;
+        ul.append(li);
+        input.value = '';
+        textarea.value = ''; 
+    
+        activeNum.textContent = '(' + tasks.length + ')';
+    } else {
+        input.classList.add('alert');
+        textarea.classList.add('alert');
+    }
+    
+});
 
-// addTaskButton.addEventListener('click', function() {
-//     let task = {};
-//     task.title = input.value;
-//     task.description = textarea.value;
-//     tasks.push(task);
-// });
 
-// и так не работает
-// let arr = [];
-// addTaskButton.addEventListener('click', function() {
-//     arr.push(input.value);
-//     // arr.push(textarea.value);
-//     console.log(input.value)
-// });
-// console.log(arr)
 
-// работет через раз
-// addTaskButton.addEventListener('click', function() {
-//     let inputValue = input.value;
-//     let textareaValue = textarea.value;
-//     console.log(inputValue, textareaValue);
-// });
+
 

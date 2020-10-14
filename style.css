@@ -38,12 +38,13 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-top: 50px;
+  /* padding-top: 50px; */
   padding-left: 30px;
   width: 30%;
 }
 .navigation__list {
-  margin-bottom: 50px;
+  /* position: fixed; */
+  margin-bottom: 200px;
 }
 .navigation__item {
   font-size: 20px;
@@ -52,15 +53,17 @@ body {
 .navigation__item:not(:last-child) {
   margin-bottom: 50px;
 }
-.active {
+.active, .active_num {
   color: orange;
   text-shadow: 1px 1px 5px black;
 }
+
 .done {
   color: green;
   text-shadow: 1px 1px 3px navy;
 }
 .navigation__button {
+  /* position: fixed; */
   width: 100px;
 }
 .tasks {
@@ -85,6 +88,11 @@ body {
   max-width: 60%;
   min-height: 100px;
   max-height: 150px;
+}
+
+.alert {
+  border: 2px solid red;
+  box-shadow: 1px 1px 1px red;
 }
 
 .tasks__list {
