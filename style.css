@@ -43,7 +43,8 @@ body {
   width: 30%;
 }
 .navigation__list {
-  /* position: fixed; */
+  position: fixed;
+  top: 250px;
   margin-bottom: 200px;
 }
 .navigation__item {
@@ -63,14 +64,15 @@ body {
   text-shadow: 1px 1px 3px navy;
 }
 .navigation__button {
-  /* position: fixed; */
+  top: 400px;
+  position: fixed;
   width: 100px;
 }
 .tasks {
   padding-top: 30px;
   width: 70%;
-  
 }
+
 .tasks__form {
   margin-bottom: 20px;
   display: flex;
@@ -96,7 +98,7 @@ body {
 }
 
 .tasks__list {
-  
+
 }
 .task__item {
 }

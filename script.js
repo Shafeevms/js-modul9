@@ -1,7 +1,7 @@
 const input = document.getElementById('input-title');
 const textarea = document.getElementById('textarea');
 const addTaskButton = document.getElementById('form-btn');
-const  ul = document.querySelector('.tasks__list');
+const ul = document.querySelector('.tasks__list');
 let activeNum = document.querySelector('.active_num');
 const tasks = [];
 
@@ -50,7 +50,14 @@ addTaskButton.addEventListener('click', function(e) {
     
 });
 
+// этой кнопки не было при загрузке ДОМа - как ее найти?  говорят про какое-то делегирование))
 
+// const deleteButton = document.getElementById('delete');
 
+// deleteButton.addEventListener('click', function(e) {
+//     e.preventDefault();
+//     target = e.target;
+//     console.log(target)
+// });
 
 
