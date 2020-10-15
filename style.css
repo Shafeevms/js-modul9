@@ -59,7 +59,7 @@ body {
   text-shadow: 1px 1px 5px black;
 }
 
-.done {
+.done, .perfomed_num {
   color: green;
   text-shadow: 1px 1px 3px navy;
 }
@@ -105,7 +105,7 @@ body {
 .task__article {
   position: relative;
 }
-label {
+.label {
   display: block;
   position: absolute;
   top: 18px;
@@ -113,16 +113,16 @@ label {
   width: 15px;
   height: 15px;
   border-radius: 50px;
-}
-.label-proccess {
-  background-color: greenyellow;
-}
-.label-done {
   background-color: red;
+}
+
+.done-green {
+  background-color: green;
 }
 .checkbox {
   display: none;
 }
+
 .task__rollup {
   display: block;
   position: absolute;
@@ -134,6 +134,10 @@ label {
   border: none;
   cursor: pointer;
 }
+.rollup {
+  transform: rotate(45deg) 0.3s; 
+}
+
 .task__clear {
   display: block;
   position: absolute;
@@ -161,7 +165,13 @@ label {
   width: 85%;
   overflow-y: auto;
   outline: 1px solid green;
-
+}
+.hide {
+  position: absolute;
+  clip: rect(0 0 0 0);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
 }
 .footer {
 }
