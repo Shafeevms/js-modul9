@@ -34,6 +34,11 @@ body {
   display: flex;
   
 }
+.fixed__wrapper {
+  width: 50%;
+  position: fixed;
+  top: 100px;
+}
 .navigation {
   display: flex;
   flex-direction: column;
@@ -43,13 +48,12 @@ body {
   width: 30%;
 }
 .navigation__list {
-  position: fixed;
-  top: 250px;
-  margin-bottom: 200px;
+  margin-bottom: 20px;
 }
 .navigation__item {
   font-size: 20px;
   font-weight: 700;
+  cursor: pointer;
 }
 .navigation__item:not(:last-child) {
   margin-bottom: 50px;
@@ -64,11 +68,12 @@ body {
   text-shadow: 1px 1px 3px navy;
 }
 .navigation__button {
-  top: 400px;
-  position: fixed;
   width: 100px;
 }
 .tasks {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   padding-top: 30px;
   width: 70%;
 }
@@ -83,15 +88,25 @@ body {
   padding-left: 10px;
   width: 50%;
   height: 30px;
+  border-radius: 10px;
+}
+
+.form__button {
+  width: 50%;
+  cursor: pointer;
 }
 .textarea {
+  margin-bottom: 10px;
   padding: 10px;
   width: 50%;
   max-width: 60%;
   min-height: 100px;
   max-height: 150px;
+  border-radius: 10px;
 }
-
+.button {
+  border-radius: 5px;
+}
 .alert {
   border: 2px solid red;
   box-shadow: 1px 1px 1px red;
@@ -114,6 +129,7 @@ body {
   height: 15px;
   border-radius: 50px;
   background-color: red;
+  cursor: pointer;
 }
 
 .done-green {
@@ -133,9 +149,11 @@ body {
   background: url('icons/arr.png') center/100% no-repeat;
   border: none;
   cursor: pointer;
+  transition: transform 0.3s ease;
+  outline: none;
 }
 .rollup {
-  transform: rotate(45deg) 0.3s; 
+  transform: rotate(90deg); 
 }
 
 .task__clear {
@@ -151,20 +169,28 @@ body {
 }
 .taks__title {
   display: block;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   padding: 10px 0;
   width: 85%;
   text-align: center;
   color: green;
-  outline: 1px solid green;
+  background: rgb(18,219,136);
+  background: linear-gradient(40deg, rgba(18,219,136,1) 9%, rgba(0,255,162,1) 49%, rgba(218,138,17,1) 95%);
+  border: 1px solid green;
+  border-radius: 10px;
 }
 .task__description {
   display: block;
+  margin-bottom: 10px;
   padding: 15px;
+  min-height: 70px;
   max-height: 140px;
   width: 85%;
   overflow-y: auto;
-  outline: 1px solid green;
+  background: rgb(18,219,136);
+  background: linear-gradient(40deg, rgba(18,219,136,1) 4%, rgba(96,199,161,1) 14%, rgba(223,211,192,1) 79%);
+  border: 1px solid green;
+  border-radius: 10px;
 }
 .hide {
   position: absolute;
