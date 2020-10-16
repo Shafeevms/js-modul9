@@ -59,8 +59,6 @@ ul.addEventListener('click', function(event) {
 //    при нажатии на левую кнопку задача уходит в perfomed 
 
     if (target.className == 'label') {
-        console.log(target)
-        target.classList.toggle('done-green'); // опять toggle работает только один раз?
         perfomed.push(tasks.find(el => el.id === +target.parentNode.getAttribute('data-num')));
         tasks = tasks.filter(el => el.id !== +target.parentNode.getAttribute('data-num'));
         parent.remove();
@@ -75,17 +73,17 @@ document
     .forEach(el => el.addEventListener('click', event => {
         event.target.classList.contains('active') ?
         showListfromArray(tasks) :
-        showListfromArray(perfomed)
+        showListfromArray(perfomed, 'done-green')
     }));
     
 
-function showListfromArray(array) {
+function showListfromArray(array, addClass) {
     ul.innerHTML = '';
-    array.forEach(el => {
+    array.map(el => {
         let li = document.createElement('li');
         li.className = 'task__item';
         li.innerHTML = `<article class="task__article" data-num="${el.id}">
-                        <button class="label"></button>
+                        <button class="label ${addClass}"></button>
                         <button class="task__rollup" aria-label="roll up the description"></button>
                         <button class="task__clear" aria-label="delete the description"></button>
                         <h2 class="taks__title">${el.title}</h2>
@@ -112,4 +110,8 @@ let count = counter();
 
 /*
  - если длина массива равна 0, то убрать спаны от названий массивов
+ - некорректно работают счетчики
+ - разобраться с поворотом стрелочки, что с этим toggle
+ - сделать кнопку которая удаляет perfomed
+ - если уже в perfomeв, кнопка выполнить работать не должна
 */
