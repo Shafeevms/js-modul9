@@ -3,23 +3,10 @@ const textarea = document.getElementById('textarea');
 const addTaskButton = document.getElementById('form-btn');
 const ul = document.querySelector('.tasks__list');
 let activeNum = document.querySelector('.active_num');
-let perfomedNum = document.querySelector('.perfomed_num')
+let perfomedNum = document.querySelector('.perfomed_num');
 let tasks = [];
 let perfomed = [];
 
-
-// так не работает... почему?
-
-// function Task(title, description) {
-//     this.title = title,
-//     this.description = description
-// }
-// addTaskButton.addEventListener('click', function() {
-//     let newTask = new Task(input.value, textarea.value);
-//     console.log(newTask);
-//     tasks.push(newTask);
-    
-// });
 
 addTaskButton.addEventListener('click', function(e) {
     e.preventDefault();
@@ -29,13 +16,14 @@ addTaskButton.addEventListener('click', function(e) {
         tasks.push({
             title: input.value,
             description: textarea.value,
+            id: count(),
         });   
         let li = document.createElement('li');
         li.className = 'task__item';
-        li.innerHTML = `<article class="task__article">
-                            <button class="label" id="checkbox"></button>
-                            <button class="task__rollup" id="roll" aria-label="roll up the description"></button>
-                            <button class="task__clear" id="delete" aria-label="delete the description"></button>
+        li.innerHTML = `<article class="task__article" data-num="${tasks[tasks.length - 1].id}">
+                            <button class="label"></button>
+                            <button class="task__rollup" aria-label="roll up the description"></button>
+                            <button class="task__clear" aria-label="delete the description"></button>
                             <h2 class="taks__title">${input.value}</h2>
                             <p class="task__description">${textarea.value}
                         </article>`;
@@ -53,46 +41,75 @@ addTaskButton.addEventListener('click', function(e) {
 
 ul.addEventListener('click', function(event) {
     let target = event.target;
-    if (target.id == 'delete') {
-        
-        target.parentElement.parentElement.remove();
-        tasks = tasks.filter(el => el.title != target.nextElementSibling.textContent 
-            && el.description != target.nextElementSibling.nextElementSibling.textContent);
+    let parent = target.parentNode;
+    // некорректно работает счетчик длины массива
+    if (target.className === 'task__clear') {
+        parent.remove();
+        tasks = tasks.filter(el => el.id !== +target.parentNode.getAttribute('data-num'));
         activeNum.textContent = '(' + tasks.length + ')';
-    };
-    if (target.id == 'roll') {
-        console.log(target.nextElementSibling.nextElementSibling.nextElementSibling, target);
-        target.nextElementSibling.nextElementSibling.nextElementSibling.classList.toggle('hide');
-        target.classList.toggle('rollup')
-    };
-    
-    // при нажатии на левую кнопку задача уходит в perfomed 
-
-    if (target.id == 'checkbox') {
-        // target.nextElementSibling.classList.toggle('done-green');
-    //     perfomed.push(tasks.find(el => {
-    //         el.title == target.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent
-    //         && el.description == target.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent
-    //     }))
-    //     activeNum.textContent = '(' + tasks.length + ')';
-    //     perfomedNum.textContent = '(' + tasks.length + ')';
+        perfomed = perfomed.filter(el => el.id !== +target.parentNode.getAttribute('data-num'));
+        perfomedNum.textContent = '(' + tasks.length + ')';
     }
 
-        let tempTitle = target.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
-        let tempDescr = target.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent 
-        console.log(tempTitle, tempDescr, tasks)
-
-        // вот все переменные совпадают а в цикле они почему-то не работают
-        tasks.forEach(function(el) {
-            console.log(el.title, tempTitle);
-            console.log(el.description, tempDescr)
-            if (el.title == tempTitle && el.description == tempDescr) {
-                console.log('yes');
-            }
-    })
-    // вернуть из массива tasks (удалить из него) и вложить в массив perfomed
-        let temp = tasks.find(el => {el.title == tempTitle && el.description == tempDescr})
+    if (target.className === 'task__rollup') {
+        parent.querySelector('.task__description').classList.toggle('hide');
+        // target.classList.toggle('rollup'); //когда добавляю эту строку - ломается работа...
+    }
     
+//    при нажатии на левую кнопку задача уходит в perfomed 
+
+    if (target.className == 'label') {
+        console.log(target)
+        target.classList.toggle('done-green'); // опять toggle работает только один раз?
+        perfomed.push(tasks.find(el => el.id === +target.parentNode.getAttribute('data-num')));
+        tasks = tasks.filter(el => el.id !== +target.parentNode.getAttribute('data-num'));
+        parent.remove();
+        activeNum.textContent = '(' + tasks.length + ')';
+        perfomedNum.textContent = '(' + perfomed.length + ')';
+    }
+
 });
 
-// не получается скручивать кнопочку "свернуть"
+document
+    .querySelectorAll('.navigation__item')
+    .forEach(el => el.addEventListener('click', event => {
+        event.target.classList.contains('active') ?
+        showListfromArray(tasks) :
+        showListfromArray(perfomed)
+    }));
+    
+
+function showListfromArray(array) {
+    ul.innerHTML = '';
+    array.forEach(el => {
+        let li = document.createElement('li');
+        li.className = 'task__item';
+        li.innerHTML = `<article class="task__article" data-num="${el.id}">
+                        <button class="label"></button>
+                        <button class="task__rollup" aria-label="roll up the description"></button>
+                        <button class="task__clear" aria-label="delete the description"></button>
+                        <h2 class="taks__title">${el.title}</h2>
+                        <p class="task__description">${el.description}
+                    </article>`;
+        ul.append(li);
+    })
+}
+function counter() {
+    let i = 0;
+    return function() {
+        return i++;
+    };
+}
+let count = counter();
+
+
+
+/* 
+- лишние id убрал
+- везде делаю строгое сравнение
+- вроде бы стал правильно пользоваться селекторами
+*/
+
+/*
+ - если длина массива равна 0, то убрать спаны от названий массивов
+*/
