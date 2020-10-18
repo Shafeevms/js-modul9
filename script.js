@@ -2,12 +2,13 @@ const input = document.getElementById('input-title');
 const textarea = document.getElementById('textarea');
 const addTaskButton = document.getElementById('form-btn');
 const ul = document.querySelector('.tasks__list');
-let activeNum = document.querySelector('.active_num');
-let perfomedNum = document.querySelector('.perfomed_num');
+const activeNum = document.querySelector('.active_num');
+const perfomedNum = document.querySelector('.perfomed_num');
 let tasks = [];
 let perfomed = [];
+let count = counter();
 
-
+// создаем задачу - работает.
 addTaskButton.addEventListener('click', function(e) {
     e.preventDefault();
     if (input.value && textarea.value) {
@@ -30,7 +31,6 @@ addTaskButton.addEventListener('click', function(e) {
         ul.append(li);
         input.value = '';
         textarea.value = ''; 
-    
         activeNum.textContent = '(' + tasks.length + ')';
     } else {
         input.classList.add('alert');
@@ -42,38 +42,44 @@ addTaskButton.addEventListener('click', function(e) {
 ul.addEventListener('click', function(event) {
     let target = event.target;
     let parent = target.parentNode;
-    // некорректно работает счетчик длины массива
+// удаляем задачу - работает
     if (target.className === 'task__clear') {
         parent.remove();
         tasks = tasks.filter(el => el.id !== +target.parentNode.getAttribute('data-num'));
-        activeNum.textContent = '(' + tasks.length + ')';
+        activeNum.textContent = tasks.length ? '(' + tasks.length + ')' : '';
         perfomed = perfomed.filter(el => el.id !== +target.parentNode.getAttribute('data-num'));
-        perfomedNum.textContent = '(' + tasks.length + ')';
+        perfomedNum.textContent = perfomed.length ? '(' + perfomed.length + ')' : '';
     }
-
+// сворачиваем задачу - НЕ РАБОТАЕТ смена класса - не поворачивается стрелочка
     if (target.className === 'task__rollup') {
         parent.querySelector('.task__description').classList.toggle('hide');
         // target.classList.toggle('rollup'); //когда добавляю эту строку - ломается работа...
     }
-    
-//    при нажатии на левую кнопку задача уходит в perfomed 
-
-    if (target.className == 'label') {
+// переходит в раздел perfomed
+    if (target.className === 'label') {
         perfomed.push(tasks.find(el => el.id === +target.parentNode.getAttribute('data-num')));
         tasks = tasks.filter(el => el.id !== +target.parentNode.getAttribute('data-num'));
         parent.remove();
-        activeNum.textContent = '(' + tasks.length + ')';
-        perfomedNum.textContent = '(' + perfomed.length + ')';
+        activeNum.textContent = tasks.length ? '(' + tasks.length + ')' : '';
+        perfomedNum.textContent = perfomed.length ? '(' + perfomed.length + ')' : '';
     }
-
 });
-
+// очищаем раздел perfomed - работает но не оч красиво по итогу
+document
+    .querySelector('.navigation__button')
+    .addEventListener('click', function(e) {
+        e.preventDefault();
+        perfomed = [];
+        perfomedNum.textContent = '';
+        showListfromArray(tasks);
+    });
+// переключаемся между разделами tasks и perfomed
 document
     .querySelectorAll('.navigation__item')
     .forEach(el => el.addEventListener('click', event => {
         event.target.classList.contains('active') ?
         showListfromArray(tasks) :
-        showListfromArray(perfomed, 'done-green')
+        showListfromArray(perfomed, 'done-green');
     }));
     
 
@@ -91,16 +97,14 @@ function showListfromArray(array, addClass) {
                     </article>`;
         ul.append(li);
     })
-}
+};
+
 function counter() {
     let i = 0;
     return function() {
         return i++;
     };
 }
-let count = counter();
-
-
 
 /* 
 - лишние id убрал
@@ -109,9 +113,7 @@ let count = counter();
 */
 
 /*
- - если длина массива равна 0, то убрать спаны от названий массивов
- - некорректно работают счетчики
- - разобраться с поворотом стрелочки, что с этим toggle
- - сделать кнопку которая удаляет perfomed
- - если уже в perfomeв, кнопка выполнить работать не должна
+ - разобраться с поворотом стрелочки, что с этим toggle?
+ - если сменить tasks на perfomed и обратно (после вызова функции showListfromArray()) перестаёт работать кнопка отправить задачу в исполненное;
+ - не смог придумать более симпатичную реализацию - когда нажимаешь на кнопку delete perfomed - хочется, чтобы если экран отображал perfomed - то показывался бы пустой экран - а если tasks, то он бы и остался. Пока получилось сделать, что по нажатию данной кнопки (какой бы не был экран изначально) мы перепрыгиваем на раздел tasks
 */

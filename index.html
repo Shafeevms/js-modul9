@@ -17,7 +17,10 @@
                 <form class="tasks__form" action="#">
                     <input id="input-title" class="tasks__input" type="text" placeholder="Title">
                     <textarea name="textarea" id="textarea" class="textarea" placeholder="Description"></textarea>
-                    <button class="button form__button" id="form-btn" >Create task</button>
+                    <div class="btn__wrapper">
+                        <button class="button form__button" id="form-btn" >Create task</button>
+                        <button class="navigation__button button" id="clear_tasks" aria-label="Delete performed">Delete performed</button>
+                    </div>
               </form>
               <ul class="navigation__list">
                   <li class="navigation__item active">Tasks
@@ -25,7 +28,6 @@
                     </li>
                     <li class="navigation__item done">Performed<span class="perfomed_num"></span></li>
                 </ul>
-                <button class="navigation__button button" id="clear_tasks" aria-label="Delete performed">Delete performed</button>
             </div>
         </section>
         <section class="tasks">
