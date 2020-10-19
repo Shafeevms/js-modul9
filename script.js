@@ -22,7 +22,7 @@ addTaskButton.addEventListener('click', function(e) {
         let li = document.createElement('li');
         li.className = 'task__item';
         li.innerHTML = `<article class="task__article" data-num="${tasks[tasks.length - 1].id}">
-                            <button class="label"></button>
+                            <button class="label" aria-label="помечают задачу "выполненное(perfomed)"></button>
                             <button class="task__rollup" aria-label="roll up the description"></button>
                             <button class="task__clear" aria-label="delete the description"></button>
                             <h2 class="taks__title">${input.value}</h2>
@@ -53,7 +53,7 @@ ul.addEventListener('click', function(event) {
 // сворачиваем задачу - НЕ РАБОТАЕТ смена класса - не поворачивается стрелочка
     if (target.className === 'task__rollup') {
         parent.querySelector('.task__description').classList.toggle('hide');
-        // target.classList.toggle('rollup'); //когда добавляю эту строку - ломается работа...
+        target.classList.toggle('rollup'); //когда добавляю эту строку - ломается работа...
     }
 // переходит в раздел perfomed
     if (target.className === 'label') {
