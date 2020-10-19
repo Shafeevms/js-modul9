@@ -28,7 +28,7 @@ addTaskButton.addEventListener('click', function(e) {
                             <h2 class="taks__title">${input.value}</h2>
                             <p class="task__description">${textarea.value}
                         </article>`;
-        ul.append(li);
+        showListfromArray(tasks);
         input.value = '';
         textarea.value = ''; 
         activeNum.textContent = '(' + tasks.length + ')';
@@ -42,6 +42,7 @@ addTaskButton.addEventListener('click', function(e) {
 ul.addEventListener('click', function(event) {
     let target = event.target;
     let parent = target.parentNode;
+    console.log(target)
 // удаляем задачу - работает
     if (target.className === 'task__clear') {
         parent.remove();
@@ -50,13 +51,15 @@ ul.addEventListener('click', function(event) {
         perfomed = perfomed.filter(el => el.id !== +target.parentNode.getAttribute('data-num'));
         perfomedNum.textContent = perfomed.length ? '(' + perfomed.length + ')' : '';
     }
-// сворачиваем задачу - НЕ РАБОТАЕТ смена класса - не поворачивается стрелочка
-    if (target.className === 'task__rollup') {
+    
+// сворачиваем задачу - работает 
+    if (target.classList.contains('task__rollup')) {
         parent.querySelector('.task__description').classList.toggle('hide');
-        target.classList.toggle('rollup'); //когда добавляю эту строку - ломается работа...
+        target.classList.toggle('rollup'); 
     }
 // переходит в раздел perfomed
-    if (target.className === 'label') {
+
+    if (target.classList.contains('label') && !target.classList.contains('done-green')) {
         perfomed.push(tasks.find(el => el.id === +target.parentNode.getAttribute('data-num')));
         tasks = tasks.filter(el => el.id !== +target.parentNode.getAttribute('data-num'));
         parent.remove();
@@ -64,7 +67,7 @@ ul.addEventListener('click', function(event) {
         perfomedNum.textContent = perfomed.length ? '(' + perfomed.length + ')' : '';
     }
 });
-// очищаем раздел perfomed - работает но не оч красиво по итогу
+// очищаем раздел perfomed - работает
 document
     .querySelector('.navigation__button')
     .addEventListener('click', function(e) {
@@ -105,15 +108,3 @@ function counter() {
         return i++;
     };
 }
-
-/* 
-- лишние id убрал
-- везде делаю строгое сравнение
-- вроде бы стал правильно пользоваться селекторами
-*/
-
-/*
- - разобраться с поворотом стрелочки, что с этим toggle?
- - если сменить tasks на perfomed и обратно (после вызова функции showListfromArray()) перестаёт работать кнопка отправить задачу в исполненное;
- - не смог придумать более симпатичную реализацию - когда нажимаешь на кнопку delete perfomed - хочется, чтобы если экран отображал perfomed - то показывался бы пустой экран - а если tasks, то он бы и остался. Пока получилось сделать, что по нажатию данной кнопки (какой бы не был экран изначально) мы перепрыгиваем на раздел tasks
-*/
